@@ -22,7 +22,7 @@ def countData(path):
             file_list = os.listdir(folder_path)
             for file in file_list:
                 try:
-                    fileName = file.split('.')[0]
+                    fileName, ext = os.path.splitext(file)
                     fileIdx = fileName[-2:]
                     cnt += 1
                     match fileIdx:
