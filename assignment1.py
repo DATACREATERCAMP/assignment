@@ -34,7 +34,9 @@ def countData(path):
         except Exception as e:
             print(e)
     print('-----------------------')
-    print(f"전체 : {cnt}, 01 : {fst}, 02 : {snd}, 03, {thr}" % ())
+    print('path -', path)
+
+    print(f"result - {cnt}, 01 : {fst}, 02 : {snd}, 03, {thr}" % ())
     print('-----------------------')
 
 
