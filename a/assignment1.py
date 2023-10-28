@@ -15,7 +15,13 @@ def countData(path):
     cnt = 0
     path = os.path.join(current_path, path)
 
+
+    if not os.path.exists(path):
+        print('Folder does not exist')
+        return
+        
     folder_list = os.listdir(path)
+
     for folder in folder_list:
         try:
             folder_path =  os.path.join(path, folder)
