@@ -1,26 +1,42 @@
 import os
 
-haed_folder_path = "/Users/dgsw8th54/Desktop/study/data camp/DCC_고등부_데이터셋/train_resized"
-haed_file_list = os.listdir(haed_folder_path)
-haed_file_count = len(haed_file_list)
-fst = 0
-snd = 0
-thr = 0
-count = 0
-for i in range(haed_file_count):
-    try:
-        folder_path =  "/Users/dgsw8th54/Desktop/study/data camp/DCC_고등부_데이터셋/train_resized/"+haed_file_list[i]
-        file_list = os.listdir(folder_path)
-        count += len(file_list)
-        for j in range(len(file_list)):
-            if file_list[j][-6:-4] == "01":
-                fst += 1;
-            elif file_list[j][-6:-4] == "02":
-                snd += 1
-            elif file_list[j][-6:-4] == "03":
-                thr += 1
-            else:
-                print(file_list[j][-6:-4])
-    except:
-        print(haed_file_list[i])
-print("전체 : %d, 01 : %d, 02 : %d, 03, %d" % (haed_file_count, fst, snd, thr))
+current_path = os.getcwd()
+print('currentPath -', current_path)
+
+TRAIN_PATH = "train_resized/"
+VALID_PATH = "valid_resized/"
+
+def countData(path):
+    global current_path
+
+    fst = 0
+    snd = 0
+    thr = 0
+    cnt = 0
+    path = os.path.join(current_path, path)
+
+    folder_list = os.listdir(path)
+    for folder in folder_list:
+        try:
+            folder_path =  os.path.join(path, folder)
+            file_list = os.listdir(folder_path)
+            for file in file_list:
+                try:
+                    fileName = file.split('.')[0]
+                    fileIdx = fileName[-2:]
+                    cnt += 1
+                    match fileIdx:
+                        case "01": fst += 1
+                        case "02": snd += 1
+                        case "03": thr += 1
+                except Exception as e:
+                    print(e)
+        except Exception as e:
+            print(e)
+    print('-----------------------')
+    print(f"전체 : {cnt}, 01 : {fst}, 02 : {snd}, 03, {thr}" % ())
+    print('-----------------------')
+
+
+countData(TRAIN_PATH)
+countData(VALID_PATH)
