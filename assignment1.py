@@ -6,12 +6,12 @@ print('currentPath -', current_path)
 TRAIN_PATH = "train_resized/"
 VALID_PATH = "valid_resized/"
 
+MAX = 3
+
 def countData(path):
     global current_path
 
-    fst = 0
-    snd = 0
-    thr = 0
+    idxLst = [0 for _ in range(MAX)]
     cnt = 0
     path = os.path.join(current_path, path)
 
@@ -31,10 +31,7 @@ def countData(path):
                     fileName, ext = os.path.splitext(file)
                     fileIdx = fileName[-2:]
                     cnt += 1
-                    match fileIdx:
-                        case "01": fst += 1
-                        case "02": snd += 1
-                        case "03": thr += 1
+                    idxLst[int(fileIdx) - 1] += 1
                 except Exception as e:
                     print(e)
         except Exception as e:
@@ -42,7 +39,8 @@ def countData(path):
     print('-----------------------')
     print('path -', path)
 
-    print(f"result - {cnt}, 01 : {fst}, 02 : {snd}, 03, {thr}" % ())
+    for (idx, i) in enumerate(idxLst):
+        print(f'{idx + 1} - {i}')
     print('-----------------------')
 
 
